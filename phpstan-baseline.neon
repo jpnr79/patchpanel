@@ -1,0 +1,103 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Call to an undefined static method Session\:\:checkCentralAccess\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: front/item_patchpanel.form.php
+
+		-
+			message: '#^Instantiated class Netpoint not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: front/item_patchpanel.form.php
+
+		-
+			message: '#^Class PluginPatchpanelPatchpanel referenced with incorrect case\: PluginPatchPanelPatchpanel\.$#'
+			identifier: class.nameCase
+			count: 1
+			path: front/patchpanel.form.php
+
+		-
+			message: '#^Access to undefined constant PluginPatchpanelItem_Patchpanel\:\:DONT_CHECK_ITEM_RIGHTS\.$#'
+			identifier: classConstant.notFound
+			count: 1
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Call to an undefined static method Dropdown\:\:showNumber\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Call to static method dropdownNetpoint\(\) on an unknown class Netpoint\.$#'
+			identifier: class.notFound
+			count: 1
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Call to static method getFormURLWithID\(\) on an unknown class NetworkPort\.$#'
+			identifier: class.notFound
+			count: 1
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Call to static method getTable\(\) on an unknown class NetworkPort\.$#'
+			identifier: class.notFound
+			count: 1
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Call to static method getType\(\) on an unknown class Netpoint\.$#'
+			identifier: class.notFound
+			count: 5
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Call to static method getType\(\) on an unknown class NetworkPort\.$#'
+			identifier: class.notFound
+			count: 5
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Call to static method showConnection\(\) on an unknown class NetworkPortInstantiation\.$#'
+			identifier: class.notFound
+			count: 1
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Instantiated class Netpoint not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Instantiated class NetworkPort not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Instantiated class QuerySubQuery not found\.$#'
+			identifier: class.notFound
+			count: 3
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Parameter \$netpoint of method PluginPatchpanelItem_Patchpanel\:\:showItemsNetpoint\(\) has invalid type Netpoint\.$#'
+			identifier: class.notFound
+			count: 1
+			path: inc/item_patchpanel.class.php
+
+		-
+			message: '#^Call to an undefined static method PluginPatchpanelPatchpanelModel\:\:dropdown\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 1
+			path: inc/patchpanel.class.php
+
+		-
+			message: '#^Call to static method dropdown\(\) on an unknown class State\.$#'
+			identifier: class.notFound
+			count: 1
+			path: inc/patchpanel.class.php
