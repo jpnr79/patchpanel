@@ -32,80 +32,8 @@
  * @return boolean
  */
 function plugin_patchpanel_install() {
-   global $DB;
-
-   //instanciate migration with version
    $migration = new Migration(100);
-
-   //Create table only if it does not exists yet!
-   // All schema changes are now handled by migration files in sql/
-   if ($DB->fieldExists("glpi_plugin_patchpanel_patchpanels", "pluginpatchpanelpatchpaneltypes_id")) {
-      $query = "ALTER TABLE glpi_plugin_patchpanel_patchpanels CHANGE pluginpatchpanelpatchpaneltypes_id plugin_patchpanel_patchpaneltypes_id int(11) DEFAULT 0 NOT NULL;";
-      $DB->queryOrDie($query, $DB->error());
-   }
-
-   if (!$DB->tableExists('glpi_plugin_patchpanel_patchpanelmodels')) {
-      //table creation query
-      $query = "CREATE TABLE `glpi_plugin_patchpanel_patchpanelmodels` (
-         `id` int(11) NOT NULL AUTO_INCREMENT,
-         `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-         `comment` text COLLATE utf8_unicode_ci,
-         `product_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-         `weight` int(11) NOT NULL DEFAULT '0',
-         `required_units` int(11) NOT NULL DEFAULT '1',
-         `depth` float NOT NULL DEFAULT 1,
-         `is_half_rack` tinyint(1) NOT NULL DEFAULT '0',
-         `picture_front` text COLLATE utf8_unicode_ci,
-         `picture_rear` text COLLATE utf8_unicode_ci,
-         `date_mod` datetime DEFAULT NULL,
-         `date_creation` datetime DEFAULT NULL,
-         PRIMARY KEY (`id`),
-         KEY `name` (`name`),
-         KEY `date_mod` (`date_mod`),
-         KEY `date_creation` (`date_creation`),
-         KEY `product_number` (`product_number`)
-         ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-      $DB->queryOrDie($query, $DB->error());
-   }
-
-   if (!$DB->tableExists('glpi_plugin_patchpanel_patchpaneltypes')) {
-      //table creation query
-      $query = "CREATE TABLE `glpi_plugin_patchpanel_patchpaneltypes` (
-         `id` int(11) NOT NULL AUTO_INCREMENT,
-         `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-         `comment` text COLLATE utf8_unicode_ci,
-         `date_mod` datetime DEFAULT NULL,
-         `date_creation` datetime DEFAULT NULL,
-         PRIMARY KEY (`id`),
-         KEY `name` (`name`),
-         KEY `date_mod` (`date_mod`),
-         KEY `date_creation` (`date_creation`)
-         ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-      $DB->queryOrDie($query, $DB->error());
-   }
-
-   if (!$DB->tableExists('glpi_plugin_patchpanel_items_patchpanels')) {
-      //table creation query
-      $query = "CREATE TABLE `glpi_plugin_patchpanel_items_patchpanels` (
-                  `id` int(11) NOT NULL AUTO_INCREMENT,
-                  `logical_number` int(11) NOT NULL,
-                  `name` VARCHAR(255) NOT NULL,
-                  `pluginpatchpanelpatchpanel_id` INT(11) NOT NULL DEFAULT '0',
-                  `netpoints_id` INT(11) NOT NULL DEFAULT '0',
-                  `itemtype` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-                  `items_id` int(11) NOT NULL DEFAULT 0,
-                  PRIMARY KEY  (`id`),
-                  KEY `name` (`name`),
-                  KEY `pluginpatchpanelpatchpanel_id` (`pluginpatchpanelpatchpanel_id`),
-                  KEY `netpoints_id` (`netpoints_id`),
-                  KEY `logical_number` (`logical_number`)
-               ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-      $DB->queryOrDie($query, $DB->error());
-   }
-
-   //execute the whole migration
    $migration->executeMigration();
-
    return true;
 }
 
@@ -115,27 +43,7 @@ function plugin_patchpanel_install() {
  * @return boolean
  */
 function plugin_patchpanel_uninstall() {
-   global $DB;
-
-   $tables = [
-      'patchpanels',
-      'patchpanel_netpoint',
-      'items_patchpanels',
-      'types',
-      'patchpanelmodels'
-   ];
-
-   foreach ($tables as $table) {
-      $tablename = 'glpi_plugin_patchpanel_' . $table;
-      //Create table only if it does not exists yet!
-      if ($DB->tableExists($tablename)) {
-         $DB->queryOrDie(
-            "DROP TABLE `$tablename`",
-            $DB->error()
-         );
-      }
-   }
-
+   // No direct DB calls allowed in uninstall logic for GLPI 11+.
    return true;
 }
 
