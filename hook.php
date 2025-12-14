@@ -38,48 +38,7 @@ function plugin_patchpanel_install() {
    $migration = new Migration(100);
 
    //Create table only if it does not exists yet!
-   if (!$DB->tableExists('glpi_plugin_patchpanel_patchpanels')) {
-      //table creation query
-      $query = "CREATE TABLE `glpi_plugin_patchpanel_patchpanels` (
-                  `id` INT(11) NOT NULL AUTO_INCREMENT,
-                  `entities_id` int(11) NOT NULL DEFAULT '0',
-                  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-                  `serial` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-                  `states_id` int(11) NOT NULL DEFAULT '0',
-                  `locations_id` int(11) NOT NULL DEFAULT '0',
-                  `plugin_patchpanel_patchpaneltypes_id` int(11) NOT NULL DEFAULT '0',
-                  `users_id_tech` int(11) NOT NULL DEFAULT '0',
-                  `manufacturers_id` int(11) NOT NULL DEFAULT '0',
-                  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
-                  `is_template` tinyint(1) NOT NULL DEFAULT '0',
-                  `template_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-                  `groups_id_tech` int(11) NOT NULL DEFAULT '0',
-                  `pluginpatchpanelpatchpanelmodels_id` int(11) NOT NULL DEFAULT '0',
-                  `otherserial` VARCHAR(255) NOT NULL,
-                  `users_id` VARCHAR(255) NOT NULL,
-                  `networks_id` VARCHAR(255) NOT NULL,
-                  `groups_id` VARCHAR(255) NOT NULL,
-                  `comment` text COLLATE utf8_unicode_ci,
-                  `date_mod` datetime DEFAULT NULL,
-                  `date_creation` datetime DEFAULT NULL,
-                  PRIMARY KEY  (`id`),
-                  KEY `name` (`name`),
-                  KEY `serial` (`serial`),
-                  KEY `states_id` (`states_id`),
-                  KEY `locations_id` (`locations_id`),
-                  KEY `plugin_patchpanel_patchpaneltypes_id` (`plugin_patchpanel_patchpaneltypes_id`),
-                  KEY `users_id_tech` (`users_id_tech`),
-                  KEY `manufacturers_id` (`manufacturers_id`),
-                  KEY `groups_id_tech` (`groups_id_tech`),
-                  KEY `pluginpatchpanelpatchpanelmodels_id` (`pluginpatchpanelpatchpanelmodels_id`),
-                  KEY `is_deleted` (`is_deleted`),
-                  KEY `is_template` (`is_template`),
-                  KEY `groups_id` (`groups_id`),
-                  KEY `date_mod` (`date_mod`),
-                  KEY `date_creation` (`date_creation`)
-               ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-      $DB->queryOrDie($query, $DB->error());
-   }
+   // All schema changes are now handled by migration files in sql/
    if ($DB->fieldExists("glpi_plugin_patchpanel_patchpanels", "pluginpatchpanelpatchpaneltypes_id")) {
       $query = "ALTER TABLE glpi_plugin_patchpanel_patchpanels CHANGE pluginpatchpanelpatchpaneltypes_id plugin_patchpanel_patchpaneltypes_id int(11) DEFAULT 0 NOT NULL;";
       $DB->queryOrDie($query, $DB->error());
