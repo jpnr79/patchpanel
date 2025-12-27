@@ -1,3 +1,4 @@
+use GlpiPlugin\Patchpanel\Item_Patchpanel;
 <?php
 /**
  * -------------------------------------------------------------------------
@@ -36,4 +37,4 @@ if (strpos($_SERVER['PHP_SELF'], "getDropdownItem_Patchpanel.php")) {
 }
 
 Session::checkLoginUser();
-PluginPatchpanelItem_Patchpanel::showDropdownItem($_POST);
+Item_Patchpanel::showDropdownItem($_POST);
